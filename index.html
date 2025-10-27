@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub-Like UI</title>
+  <link rel="stylesheet" href="github-like-theme.min.css" />
+  <style>
+    .hamburger{width:28px;height:22px;display:none;flex-direction:column;justify-content:space-between;cursor:pointer}
+    .hamburger span{display:block;height:3px;background:var(--text);border-radius:3px;transition:.3s}
+    .hamburger.active span:nth-child(1){transform:translateY(9px) rotate(45deg)}
+    .hamburger.active span:nth-child(2){opacity:0}
+    .hamburger.active span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
+    @media(max-width:900px){.hamburger{display:flex}.gh-sidebar{display:flex!important;position:fixed;top:60px;left:-260px;height:calc(100% - 60px);width:240px;flex-direction:column;background:var(--panel);border-right:1px solid var(--border);padding:16px;box-shadow:var(--shadow);transition:left .3s ease;z-index:999}.gh-sidebar.open{left:0}.gh-main{grid-template-columns:1fr!important}}
+  </style>
+</head>
+<body>
+  <header class="gh-header">
+    <div class="gh-logo">GitHub UI</div>
+    <div class="gh-search"><input type="text" class="gh-search-input" placeholder="Search..."></div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </header>
+  <main class="gh-main">
+    <aside class="gh-sidebar" id="sidebar">
+      <ul class="gh-menu"><li>Overview</li><li>Repositories</li><li>Projects</li><li>Stars</li><li>Settings</li></ul>
+    </aside>
+    <section>
+      <div class="repo-header"><div><h2 class="repo-title">Awesome Project</h2><p class="repo-desc">This project looks like it’s hosted on GitHub.</p></div><button class="gh-btn primary">New Repo</button></div>
+      <div class="repo-grid">
+        <div class="repo-card"><h3>weather-app</h3><p>☁️ Simple weather UI using OpenWeather API</p></div>
+        <div class="repo-card"><h3>todo-list</h3><p>✅ Manage tasks like a pro</p></div>
+      </div>
+    </section>
+  </main>
+  <footer class="gh-footer">© 2025 GitHub-Style UI</footer>
+  <script>
+    const toggleBtn=document.createElement("button");toggleBtn.textContent="🌗 Theme";toggleBtn.className="gh-btn";toggleBtn.style.position="fixed";toggleBtn.style.bottom="20px";toggleBtn.style.right="20px";toggleBtn.style.zIndex="1000";document.body.appendChild(toggleBtn);const savedTheme=localStorage.getItem("theme")||"dark";document.body.dataset.theme=savedTheme;toggleBtn.onclick=()=>{const t=document.body.dataset.theme==="dark"?"light":"dark";document.body.dataset.theme=t;localStorage.setItem("theme",t)};
+    const burger=document.getElementById("hamburger");const sidebar=document.getElementById("sidebar");burger.addEventListener("click",()=>{burger.classList.toggle("active");sidebar.classList.toggle("open")});
+  </script>
+</body>
+</html>
